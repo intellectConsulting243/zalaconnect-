@@ -6,31 +6,52 @@
     <title>Inscription - ZalalConnecté</title>
     <!-- Chargement de Tailwind CSS pour un design moderne et responsive -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuration de Tailwind pour le mode sombre et la police Inter
+        tailwind.config = {
+            darkMode: 'class', // Active le mode sombre basé sur la classe
+            theme: {
+                extend: {
+                    colors: {
+                        // Ajout des couleurs sombres pour la cohérence inter-pages
+                        'dark-bg': '#111827', // Gray-900
+                        'dark-card': '#1f2937', // Gray-800
+                        'blue-active': '#3b82f6',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
         /* Définition de la police Inter par défaut pour toute la page */
         body {
             font-family: 'Inter', sans-serif;
+            /* Ajout de la transition pour la couleur de fond et le texte */
+            transition: background-color 0.3s, color 0.3s;
         }
     </style>
 </head>
-<!-- Utilisation du fond blanc et centrage du contenu -->
-<body class="bg-white min-h-screen p-4 flex items-center justify-center text-gray-900">
+<!-- Mise à jour des classes de corps pour le mode sombre -->
+<body class="bg-gray-50 dark:bg-dark-bg min-h-screen p-4 flex items-center justify-center text-gray-900 dark:text-gray-100">
 
     <!-- Conteneur principal: Carte d'inscription stylisée -->
-    <div class="w-full max-w-sm mx-auto bg-white p-8 rounded-2xl shadow-2xl shadow-blue-200/50 space-y-6 border border-blue-300">
+    <div class="w-full max-w-sm mx-auto bg-white dark:bg-dark-card p-8 rounded-2xl shadow-2xl shadow-blue-200/50 dark:shadow-gray-800/50 space-y-6 border border-blue-300 dark:border-blue-700">
 
         <!-- En-tête de la carte -->
         <header class="text-center space-y-2">
             <!-- Logo ou icône -->
-            <div class="mx-auto w-16 h-16 p-1 bg-blue-50 rounded-full shadow-inner">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="mx-auto w-16 h-16 p-1 bg-blue-50 dark:bg-blue-900 rounded-full shadow-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                 </svg>
             </div>
-            <h1 class="text-2xl font-extrabold text-blue-600">
+            <h1 class="text-2xl font-extrabold text-blue-600 dark:text-blue-400">
                 Créer un compte
             </h1>
-            <p class="text-sm text-gray-500">
+            <p class="text-sm text-gray-500 dark:text-gray-400">
                 Accédez à tous nos forfaits Wi-Fi
             </p>
         </header>
@@ -45,7 +66,7 @@
                     name="nom"
                     placeholder="Nom complet"
                     required
-                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                 >
                 <!-- Champ Email -->
                 <input
@@ -53,7 +74,7 @@
                     name="email"
                     placeholder="Adresse email"
                     required
-                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                 >
                 <!-- Champ Téléphone -->
                 <input
@@ -61,7 +82,7 @@
                     name="telephone"
                     placeholder="Numéro de téléphone"
                     required
-                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                 >
                 <!-- Champ Mot de passe -->
                 <input
@@ -69,7 +90,7 @@
                     name="motdepasse"
                     placeholder="Mot de passe"
                     required
-                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                 >
 
                 <!-- Bouton S'inscrire -->
@@ -83,10 +104,44 @@
         </section>
 
         <!-- Lien de retour -->
-        <p class="back-login text-center text-sm text-gray-500 pt-2">
+        <p class="back-login text-center text-sm text-gray-500 dark:text-gray-400 pt-2">
             Déjà un compte ?
-            <a href="index.html" class="text-blue-600 hover:text-blue-800 font-medium transition duration-200">Se connecter</a>
+            <a href="index.html" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition duration-200">Se connecter</a>
         </p>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ==========================================================
+            // ===== Logique du Mode Sombre (Lecture seule de localStorage) =====
+            // ==========================================================
+            const htmlElement = document.documentElement;
+
+            // 1. Fonction pour appliquer le thème
+            function applyTheme(isDark) {
+                if (isDark) {
+                    htmlElement.classList.add('dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                }
+            }
+
+            // 2. Lire la préférence au chargement (depuis localStorage ou défaut)
+            const storedTheme = localStorage.getItem('darkMode');
+            let isDarkMode;
+
+            if (storedTheme === 'true') {
+                isDarkMode = true;
+            } else if (storedTheme === 'false') {
+                isDarkMode = false;
+            } else {
+                // Par défaut, utiliser la préférence système si aucune n'est stockée
+                isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+
+            // Appliquer le thème initial
+            applyTheme(isDarkMode);
+        });
+    </script>
 </body>
 </html>
