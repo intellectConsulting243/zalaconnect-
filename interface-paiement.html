@@ -1,72 +1,112 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="dark"> <!-- Ajout de la classe "dark" pour le mode sombre -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paiement - ZalalConnecté</title>
     <!-- Chargement de Tailwind CSS pour un design moderne et responsive -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuration de Tailwind pour le mode sombre et la police Inter
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-bg': '#111827', // Gray-900
+                        'dark-card': '#1f2937', // Gray-800
+                        'blue-active': '#3b82f6',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
         /* Définition de la police Inter par défaut pour toute la page */
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
-        /* Styles pour masquer les radios standards */
+
+        /* Styles pour masquer les radios standards et styler les cartes de sélection */
         input[type="radio"]:checked + label {
-            border-color: #3b82f6; /* Bordure bleue active */
-            box-shadow: 0 4px 6px -1px rgb(59 130 246 / 0.1), 0 2px 4px -2px rgb(59 130 246 / 0.1);
+            border-color: #3b82f6 !important; /* Bordure bleue active */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* Anneau bleu (ring-4 equivalent) */
+            position: relative;
+        }
+        /* Ajout d'une coche pour l'état sélectionné (design pro) */
+        input[type="radio"]:checked + label::after {
+            content: '✓';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 24px;
+            height: 24px;
+            background-color: #10b981; /* green-500 */
+            color: white;
+            border-radius: 9999px; /* full circle */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 10;
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans min-h-screen p-4 flex flex-col items-center justify-center text-gray-900">
+<!-- Utilisation des classes dark pour un fond et texte cohérents -->
+<body class="bg-gray-50 dark:bg-dark-bg font-sans min-h-screen p-3 sm:p-4 flex flex-col items-center justify-center text-gray-900 dark:text-gray-100">
 
-    <!-- Conteneur principal de paiement -->
-    <div class="w-full max-w-2xl mx-auto bg-white p-6 sm:p-10 rounded-2xl shadow-2xl shadow-blue-200/50 space-y-8 border border-blue-300">
+    <!-- Conteneur principal de paiement - Espacement réduit p-5 sm:p-8, space-y-6 -->
+    <div class="w-full max-w-2xl mx-auto bg-white dark:bg-dark-card p-5 sm:p-8 rounded-2xl shadow-2xl shadow-blue-200/50 dark:shadow-gray-800/50 space-y-6 border border-blue-300 dark:border-blue-700">
 
-        <header class="text-center space-y-2">
-            <h1 class="text-3xl font-extrabold text-blue-600">
-                Paiement en Ligne
+        <header class="text-center space-y-1"> <!-- Espacement réduit -->
+            <h1 class="text-3xl font-extrabold text-blue-600 dark:text-blue-400">
+                Finaliser l'Achat
             </h1>
-            <p class="text-gray-500">
-                Sélectionnez votre forfait et la zone Wi-Fi pour continuer.
+            <p class="text-gray-500 dark:text-gray-400 text-sm"> <!-- text-sm pour plus de compacité -->
+                Sélectionnez votre forfait, la zone Wi-Fi et votre mode de paiement.
             </p>
         </header>
 
         <!-- Formulaire de Paiement Simulé -->
-        <form action="#" method="POST" class="space-y-8">
+        <form action="#" method="POST" class="space-y-6"> <!-- Espacement réduit -->
 
             <!-- SECTION 1: SÉLECTION DU FORFAIT (CARTES) -->
             <div>
-                <h2 class="text-xl font-semibold mb-4 text-blue-600 border-b pb-2">1. Choisissez votre Forfait</h2>
+                <h2 class="text-xl font-bold mb-3 text-blue-600 dark:text-blue-400 border-b border-gray-200 dark:border-gray-700 pb-2">1. Choisissez votre Forfait</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-                    <!-- Carte de Tarif BASIQUE -->
+                    <!-- Carte de Tarif BASIQUE (1h - Cohérent avec index.html) -->
                     <input type="radio" id="plan-basique" name="plan" value="basique" class="hidden" checked>
-                    <label for="plan-basique" class="block p-5 border-2 border-gray-200 rounded-xl cursor-pointer transition duration-200 hover:border-blue-400 bg-white">
-                        <div class="text-center">
-                            <p class="text-sm font-medium text-blue-600">Basique (2h)</p>
-                            <p class="text-3xl font-bold text-green-600 my-1">500 FC</p>
-                            <p class="text-xs text-gray-500">Idéal pour navigation rapide</p>
+                    <label for="plan-basique" class="block p-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer transition duration-200 hover:border-blue-500 dark:hover:border-blue-400 bg-gray-50 dark:bg-gray-700/50 shadow-md hover:shadow-lg">
+                        <div class="text-center space-y-0.5">
+                            <p class="text-base font-semibold text-blue-600 dark:text-blue-400">Basique (1h)</p>
+                            <p class="text-3xl font-extrabold text-green-600 dark:text-green-400">500 FC</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-300">Navigation et mails</p>
                         </div>
                     </label>
 
-                    <!-- Carte de Tarif STANDARD -->
+                    <!-- Carte de Tarif STANDARD (3h - Cohérent avec index.html) -->
                     <input type="radio" id="plan-standard" name="plan" value="standard" class="hidden">
-                    <label for="plan-standard" class="block p-5 border-2 border-gray-200 rounded-xl cursor-pointer transition duration-200 hover:border-blue-400 bg-white">
-                        <div class="text-center">
-                            <p class="text-sm font-medium text-blue-600">Standard (5h)</p>
-                            <p class="text-3xl font-bold text-green-600 my-1">1000 FC</p>
-                            <p class="text-xs text-gray-500">Streaming et téléchargement léger</p>
+                    <label for="plan-standard" class="block p-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer transition duration-200 hover:border-blue-500 dark:hover:border-blue-400 bg-gray-50 dark:bg-gray-700/50 shadow-md hover:shadow-lg">
+                        <div class="text-center space-y-0.5">
+                            <p class="text-base font-semibold text-blue-600 dark:text-blue-400">Standard (3h)</p>
+                            <p class="text-3xl font-extrabold text-green-600 dark:text-green-400">1000 FC</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-300">Streaming et messagerie</p>
                         </div>
                     </label>
 
-                    <!-- Carte de Tarif PREMIUM -->
+                    <!-- Carte de Tarif PREMIUM (24h - Cohérent avec index.html) -->
                     <input type="radio" id="plan-premium" name="plan" value="premium" class="hidden">
-                    <label for="plan-premium" class="block p-5 border-2 border-gray-200 rounded-xl cursor-pointer transition duration-200 hover:border-blue-400 bg-white">
-                        <div class="text-center">
-                            <p class="text-sm font-medium text-blue-600">Premium (24h)</p>
-                            <p class="text-3xl font-bold text-green-600 my-1">2000 FC</p>
-                            <p class="text-xs text-gray-500">Usage intensif et jeux en ligne</p>
+                    <label for="plan-premium" class="block p-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer transition duration-200 hover:border-blue-500 dark:hover:border-blue-400 bg-gray-50 dark:bg-gray-700/50 shadow-md hover:shadow-lg">
+                        <div class="text-center space-y-0.5">
+                            <p class="text-base font-semibold text-blue-600 dark:text-blue-400">Premium (24h)</p>
+                            <p class="text-3xl font-extrabold text-green-600 dark:text-green-400">2000 FC</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-300">Usage intensif et VPN</p>
                         </div>
                     </label>
                 </div>
@@ -74,11 +114,11 @@
 
             <!-- SECTION 2: SÉLECTION DE LA ZONE WI-FI -->
             <div>
-                <h2 class="text-xl font-semibold mb-4 text-blue-600 border-b pb-2">2. Choisissez la Zone Wi-Fi</h2>
+                <h2 class="text-xl font-bold mb-3 text-blue-600 dark:text-blue-400 border-b border-gray-200 dark:border-gray-700 pb-2">2. Lieu de Connexion</h2>
                 <select name="wifi_zone" required
-                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 focus:ring-blue-500 focus:border-blue-500 transition duration-200 shadow-sm"
+                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500 transition duration-200 shadow-sm"
                 >
-                    <option value="" disabled selected>Sélectionnez la zone Wi-Fi la plus proche...</option>
+                    <option value="" disabled selected>Sélectionnez la zone Wi-Fi...</option>
                     <!-- Exemples de Zones Wi-Fi -->
                     <option value="zone-a">Zone Commerciale (Centre Ville)</option>
                     <option value="zone-b">Campus Universitaire (UAS)</option>
@@ -86,66 +126,64 @@
                     <option value="zone-d">Aéroport International (Zone des départs)</option>
                     <option value="zone-e">Marché Principal (Kintambo)</option>
                 </select>
-                <p class="text-xs text-gray-500 mt-2">Choisissez la zone pour laquelle vous achetez l'accès.</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Ce choix garantit l'activation dans la zone Wi-Fi correspondante.</p>
             </div>
 
 
-            <!-- SECTION 3: SÉLECTION DU MODE DE PAIEMENT (Mise à jour avec les images de logo) -->
+            <!-- SECTION 3: SÉLECTION DU MODE DE PAIEMENT -->
             <div>
-                <h2 class="text-xl font-semibold mb-4 text-blue-600 border-b pb-2">3. Choisissez le Mode de Paiement</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <h2 class="text-xl font-bold mb-3 text-blue-600 dark:text-blue-400 border-b border-gray-200 dark:border-gray-700 pb-2">3. Mode de Paiement</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3"> <!-- Espacement réduit -->
 
                     <!-- VISA PAY -->
                     <input type="radio" id="pay-visa" name="payment_method" value="visa" class="hidden" checked>
-                    <label for="pay-visa" class="flex flex-col items-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer transition duration-200 hover:border-blue-400">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/1200px-Visa_Inc._logo.svg.png" alt="Visa Pay" class="h-6 w-auto mb-2">
-                        <span class="text-sm font-medium text-gray-700">VISA/MasterCard</span>
+                    <label for="pay-visa" class="flex flex-col items-center justify-center p-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer transition duration-200 hover:border-blue-500 dark:hover:border-blue-400 bg-white dark:bg-gray-700/50 shadow-md">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/1200px-Visa_Inc._logo.svg.png" alt="Visa Pay" class="h-5 w-auto mb-1 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/80x20/2563eb/ffffff?text=VISA';">
+                        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">VISA/MasterCard</span>
                     </label>
 
-                    <!-- ORANGE MONEY (Mise à jour avec l'image fournie) -->
+                    <!-- ORANGE MONEY (Ajout de fallback) -->
                     <input type="radio" id="pay-orange" name="payment_method" value="orange" class="hidden">
-                    <label for="pay-orange" class="flex flex-col items-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer transition duration-200 hover:border-blue-400">
-                        <!-- Utilisation de l'image orangemoney.jpg -->
-                        <img src="images/orangemoney.jpg" alt="Orange Money" class="h-8 w-auto mb-1 object-contain">
-                        <span class="text-sm font-medium text-gray-700">Orange Money</span>
+                    <label for="pay-orange" class="flex flex-col items-center justify-center p-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer transition duration-200 hover:border-blue-500 dark:hover:border-blue-400 bg-white dark:bg-gray-700/50 shadow-md">
+                        <img src="images/orangemoney.jpg" alt="Orange Money" class="h-6 w-auto mb-1 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/80x24/ff7f00/ffffff?text=Orange';">
+                        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Orange Money</span>
                     </label>
 
-                    <!-- AIRTEL MONEY (Mise à jour avec l'image fournie) -->
+                    <!-- AIRTEL MONEY (Ajout de fallback) -->
                     <input type="radio" id="pay-airtel" name="payment_method" value="airtel" class="hidden">
-                    <label for="pay-airtel" class="flex flex-col items-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer transition duration-200 hover:border-blue-400">
-                        <!-- Utilisation de l'image airtel.png -->
-                        <img src="images/airtel.png" alt="Airtel Money" class="h-8 w-auto mb-1 object-contain">
-                        <span class="text-sm font-medium text-gray-700">Airtel Money</span>
+                    <label for="pay-airtel" class="flex flex-col items-center justify-center p-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer transition duration-200 hover:border-blue-500 dark:hover:border-blue-400 bg-white dark:bg-gray-700/50 shadow-md">
+                        <img src="images/airtel.png" alt="Airtel Money" class="h-6 w-auto mb-1 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/80x24/ff0000/ffffff?text=Airtel';">
+                        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Airtel Money</span>
                     </label>
 
-                    <!-- MPSA (M-Pesa) (Mise à jour avec l'image fournie) -->
+                    <!-- MPSA (M-Pesa) (Ajout de fallback) -->
                     <input type="radio" id="pay-mpsa" name="payment_method" value="mpsa" class="hidden">
-                    <label for="pay-mpsa" class="flex flex-col items-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer transition duration-200 hover:border-blue-400">
-                        <!-- Utilisation de l'image Mpsa.jpg -->
-                        <img src="images/Mpsa.jpg" alt="MPSA / M-Pesa" class="h-8 w-auto mb-1 object-contain">
-                        <span class="text-sm font-medium text-gray-700">M-Pesa</span>
+                    <label for="pay-mpsa" class="flex flex-col items-center justify-center p-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer transition duration-200 hover:border-blue-500 dark:hover:border-blue-400 bg-white dark:bg-gray-700/50 shadow-md">
+                        <img src="images/Mpsa.jpg" alt="MPSA / M-Pesa" class="h-6 w-auto mb-1 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/80x24/00a87a/ffffff?text=M-Pesa';">
+                        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">M-Pesa</span>
                     </label>
 
                 </div>
             </div>
 
-            <!-- SECTION 4: RÉCAPITULATIF ET BOUTON DE PAIEMENT -->
-            <div class="pt-4 border-t border-gray-200">
-                <div class="flex justify-between font-bold text-xl mb-4 text-blue-600">
-                    <span>Total à Payer :</span>
-                    <span id="total-amount">500 FC</span>
+            <!-- SECTION 4: RÉCAPITULATIF ET BOUTON DE PAIEMENT (Mise en évidence) -->
+            <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                <!-- Bloc Total à Payer plus visible -->
+                <div class="flex justify-between font-bold text-2xl mb-4 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/50 border border-blue-200 dark:border-blue-700">
+                    <span class="text-blue-700 dark:text-blue-300">Total à Payer :</span>
+                    <span id="total-amount" class="text-green-600 dark:text-green-400">500 FC</span>
                 </div>
 
                 <button
                     type="submit"
-                    class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl shadow-lg transition duration-300 transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-green-500/50"
+                    class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg transition duration-300 transform hover:scale-[1.005] focus:outline-none focus:ring-4 focus:ring-green-500/50 text-lg"
                 >
                     Procéder au Paiement Sécurisé
                 </button>
             </div>
 
             <div class="text-center pt-2">
-                 <a href="index.html" class="text-blue-600 hover:text-blue-800 text-sm">Annuler et revenir à la connexion</a>
+                 <a href="index.html" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm transition duration-200">Annuler et revenir à la connexion</a>
             </div>
 
         </form>
@@ -157,7 +195,7 @@
             const form = document.querySelector('form');
             const totalAmountSpan = document.getElementById('total-amount');
 
-            // Définir les prix
+            // Définir les prix (maintenant cohérents avec index.html)
             const prices = {
                 'basique': '500 FC',
                 'standard': '1000 FC',
