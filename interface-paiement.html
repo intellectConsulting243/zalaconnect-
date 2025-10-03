@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="fr" class="dark"> <!-- Ajout de la classe "dark" pour le mode sombre -->
+<!-- J'ai retiré la classe "dark" ici. Le thème sera appliqué par JavaScript. -->
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -189,9 +190,45 @@
         </form>
     </div>
 
-    <!-- JavaScript pour mettre à jour le montant total -->
+    <!-- JavaScript pour mettre à jour le montant total ET appliquer le thème -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            // ==========================================================
+            // ===== Logique du Mode Sombre (Lecture seule de localStorage) =====
+            // Cette partie assure la persistance du thème choisi sur index.html
+            // ==========================================================
+            const htmlElement = document.documentElement;
+
+            // 1. Fonction pour appliquer le thème
+            function applyTheme(isDark) {
+                if (isDark) {
+                    htmlElement.classList.add('dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                }
+            }
+
+            // 2. Lire la préférence au chargement (depuis localStorage ou défaut)
+            const storedTheme = localStorage.getItem('darkMode');
+            let isDarkMode;
+
+            if (storedTheme === 'true') {
+                isDarkMode = true;
+            } else if (storedTheme === 'false') {
+                isDarkMode = false;
+            } else {
+                // Par défaut, utiliser la préférence système si aucune n'est stockée
+                isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+
+            // Appliquer le thème initial
+            applyTheme(isDarkMode);
+
+
+            // ==========================================================
+            // ===== Logique du Sélecteur de Paiement (originale) =====
+            // ==========================================================
             const form = document.querySelector('form');
             const totalAmountSpan = document.getElementById('total-amount');
 
