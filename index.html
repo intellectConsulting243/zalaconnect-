@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="dark">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +33,7 @@
         /* Styles spécifiques pour le carrousel d'images publicitaires */
         .billboard-container {
             position: relative;
-            /* Hauteur réduite de 18rem à 11rem pour être très compact et rectangulaire */
+            /* Hauteur compacte */
             height: 11rem;
             overflow: hidden;
             border-radius: 0.75rem; /* rounded-xl */
@@ -70,23 +70,22 @@
         }
     </style>
 </head>
-<!-- Réduction du padding du body à p-3 -->
-<body class="bg-white dark:bg-dark-bg font-sans min-h-screen p-3 flex items-center justify-center text-gray-900 dark:text-gray-100">
+<body class="bg-gray-50 dark:bg-dark-bg font-sans min-h-screen p-3 flex items-center justify-center text-gray-900 dark:text-gray-100">
 
-    <!-- Réduction du padding et du space-y général -->
+    <!-- Conteneur principal -->
     <div class="w-full max-w-lg mx-auto bg-white dark:bg-dark-card p-5 sm:p-7 rounded-xl shadow-2xl shadow-blue-200/50 dark:shadow-gray-800/50 space-y-4 md:space-y-5 border border-blue-300 dark:border-blue-700">
 
-        <!-- Conteneur pour gérer l'espace entre le toggle et le header -->
+        <!-- Conteneur pour le toggle et le header -->
         <div class="flex flex-col relative">
-            <!-- Bouton pour basculer le mode sombre (Positionné en haut à droite) -->
+            <!-- BOUTON DE BASCULE DU MODE SOMBRE - PRESENT UNIQUEMENT SUR CETTE PAGE -->
             <button id="theme-toggle" class="absolute top-0 right-0 p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 transition duration-300 hover:scale-105 z-10">
-                <!-- Icônes -->
+                <!-- Icônes (initialement masquées, gérées par JS) -->
                 <svg id="icon-sun" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                 <svg id="icon-moon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
             </button>
 
             <header class="text-center space-y-2 pt-8"> <!-- pt-8 pour laisser de l'espace au toggle absolu -->
-                <!-- Logo: Retour au chemin local + ajout d'un onerror pour la substitution -->
+                <!-- Logo: Chemin local + onerror -->
                 <div class="mx-auto w-28 h-28 flex items-center justify-center rounded-full overflow-hidden shadow-lg border-4 border-white dark:border-gray-700 bg-white dark:bg-gray-700">
                     <img
                         src="images/zala.png"
@@ -104,19 +103,18 @@
             </header>
         </div>
 
-        <!-- Réduction du pt à pt-2 et du mb à mb-3 -->
+        <!-- Section Publicités -->
         <section class="ads pt-2">
             <h2 class="text-xl font-semibold mb-3 text-center text-blue-600 dark:text-blue-400">
                 Nos Partenariats & Promotions
             </h2>
-            <!-- Panneau publicitaire avec carrousel d'images (hauteur réduite en CSS) -->
             <div id="billboard-slider" class="billboard-container">
                 <!-- Utilisation de placehold.co comme fallback pour les images -->
                 <div class="billboard-image active">
-                    <img src="images/lf-douane.jpeg" alt="Promotion Douanes Logistique LF Groupe" class="w-full h-full object-cover">
+                    <img src="images/lf-travel.jpeg" alt="Promotion Douanes Logistique LF Groupe" class="w-full h-full object-cover">
                 </div>
                 <div class="billboard-image">
-                    <img src="images/lf-travel.jpeg" alt="Promotion Mécanique Générale LF Groupe" class="w-full h-full object-cover">
+                    <img src="images/lf-douane.jpeg" alt="Promotion Mécanique Générale LF Groupe" class="w-full h-full object-cover">
                 </div>
                 <div class="billboard-image">
                     <img src="images/lf-mecanique.jpeg" alt="Promotion Assistance Voyage LF Groupe" class="w-full h-full object-cover">
@@ -124,10 +122,9 @@
             </div>
         </section>
 
-        <!-- Réduction du space-y et pt -->
+        <!-- Formulaire de Connexion -->
         <section class="login-form space-y-3 pt-3">
             <form action="/connect" method="post" class="space-y-3">
-                <!-- Inputs avec p-3 et rounded-lg (plus compact) -->
                 <input
                     id="username-input"
                     type="text"
@@ -152,14 +149,13 @@
                     Se connecter au Wi-Fi
                 </button>
             </form>
-           <!-- Réduction du pt à pt-1 -->
            <p class="no-account text-center text-sm text-gray-500 dark:text-gray-400 pt-1">
                 Pas encore de compte ?
                 <a href="register.html" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition duration-200">Créer un compte</a>
             </p>
         </section>
 
-        <!-- Lien de paiement : py-3 à py-2.5 et rounded-xl à rounded-lg -->
+        <!-- Lien de paiement -->
         <div class="text-center pt-2">
             <a href="interface-paiement.html" class="inline-flex items-center justify-center w-full px-4 py-2.5 border border-blue-600 text-blue-600 dark:text-blue-400 bg-white dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-gray-700 font-bold rounded-lg shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -169,7 +165,7 @@
             </a>
         </div>
 
-        <!-- Réduction du pt à pt-3 et mb à mb-3 -->
+        <!-- Section Abonnements -->
         <section class="plans pt-3">
             <h2 class="text-xl font-semibold mb-3 text-center text-blue-600 dark:text-blue-400">
                 Nos Formules d'Abonnement
@@ -178,7 +174,6 @@
                 <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
                     <thead class="bg-blue-600 dark:bg-blue-700">
                         <tr>
-                            <!-- Réduction du padding à px-4 py-2 -->
                             <th scope="col" class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider text-white">
                                 Formule
                             </th>
@@ -191,7 +186,6 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
-                        <!-- Réduction du padding à px-4 py-2.5 -->
                         <tr class="hover:bg-blue-50 dark:hover:bg-blue-900 transition duration-150">
                             <td class="px-4 py-2.5 whitespace-nowrap text-sm font-medium text-blue-600 dark:text-blue-400">Basique</td>
                             <td class="px-4 py-2.5 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">1 heure</td>
@@ -213,7 +207,7 @@
         </section>
 
 
-        <!-- Réduction du pt à pt-2 -->
+        <!-- Footer -->
         <footer class="text-center pt-2 text-xs text-gray-500 dark:text-gray-500">
             <p>&copy; 2025 ZalaConnecté. Tous droits réservés.</p>
         </footer>
@@ -221,45 +215,55 @@
     </div>
 
 <script>
-    // ==========================================================
-    // ===== Logique du Mode Sombre (Dark Mode) =====
-    // ==========================================================
-    const htmlElement = document.documentElement;
-    const themeToggle = document.getElementById('theme-toggle');
-    const iconSun = document.getElementById('icon-sun');
-    const iconMoon = document.getElementById('icon-moon');
-
-    // Fonction pour mettre à jour l'icône du bouton
-    function updateIcon(isDarkMode) {
-        if (isDarkMode) {
-            iconSun.classList.remove('hidden');
-            iconMoon.classList.add('hidden');
-        } else {
-            iconSun.classList.add('hidden');
-            iconMoon.classList.remove('hidden');
-        }
-    }
-
-    // Lire la préférence utilisateur ou utiliser le mode sombre par défaut
-    let isDarkMode = htmlElement.classList.contains('dark');
-    updateIcon(isDarkMode);
-
-    themeToggle.addEventListener('click', () => {
-        isDarkMode = !isDarkMode; // Inverser l'état
-
-        if (isDarkMode) {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
-
-        updateIcon(isDarkMode);
-    });
-
-    // ==========================================================
-    // ===== Validation simple du formulaire (sans alert()) =====
-    // ==========================================================
     document.addEventListener('DOMContentLoaded', function() {
+        // ==========================================================
+        // ===== Logique du Mode Sombre (Dark Mode) avec persistance =====
+        // ==========================================================
+        const htmlElement = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+        const iconSun = document.getElementById('icon-sun');
+        const iconMoon = document.getElementById('icon-moon');
+
+        // 1. Fonction pour appliquer le thème et mettre à jour les icônes
+        function applyTheme(isDark) {
+            if (isDark) {
+                htmlElement.classList.add('dark');
+                iconSun.classList.remove('hidden');
+                iconMoon.classList.add('hidden');
+            } else {
+                htmlElement.classList.remove('dark');
+                iconSun.classList.add('hidden');
+                iconMoon.classList.remove('hidden');
+            }
+        }
+
+        // 2. Lire la préférence au chargement (depuis localStorage ou défaut)
+        const storedTheme = localStorage.getItem('darkMode');
+        let isDarkMode;
+
+        if (storedTheme === 'true') {
+            isDarkMode = true;
+        } else if (storedTheme === 'false') {
+            isDarkMode = false;
+        } else {
+            // Par défaut, utiliser la préférence système
+            isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        // Appliquer le thème initial
+        applyTheme(isDarkMode);
+
+        // 3. Événement de basculement (SAUVEGARDE DANS localStorage)
+        themeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode; // Inverser l'état
+            applyTheme(isDarkMode);
+            localStorage.setItem('darkMode', isDarkMode); // Sauvegarder la préférence pour TOUTES les pages
+        });
+
+
+        // ==========================================================
+        // ===== Validation simple du formulaire (sans alert()) =====
+        // ==========================================================
         const form = document.querySelector('.login-form form');
         const usernameInput = document.getElementById('username-input');
         const tokenInput = document.getElementById('login-input');
@@ -273,7 +277,7 @@
                 e.preventDefault();
                 errorMessage.classList.remove('hidden');
                 usernameInput.focus();
-                // Utilisation d'un message d'erreur temporaire à la place d'une alerte
+                // Message d'erreur temporaire
                 setTimeout(() => {
                     errorMessage.classList.add('hidden');
                 }, 3000);
@@ -292,17 +296,11 @@
         const intervalTime = 3000; // 3 secondes
 
         function showNextSlide() {
-            // Retirer la classe 'active' de la diapositive actuelle
             slides[currentSlide].classList.remove('active');
-
-            // Passer à la diapositive suivante
             currentSlide = (currentSlide + 1) % totalSlides;
-
-            // Ajouter la classe 'active' à la nouvelle diapositive
             slides[currentSlide].classList.add('active');
         }
 
-        // Démarrer le carrousel uniquement s'il y a plus d'une image
         if (totalSlides > 1) {
              slides[0].classList.add('active');
              setInterval(showNextSlide, intervalTime);
