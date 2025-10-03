@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark"> <!-- Ajout de la classe 'dark' pour le mode sombre par défaut -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZalalConnecté - Portail Captif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuration de Tailwind pour le mode sombre basé sur la classe
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // Définition d'une couleur d'arrière-plan sombre plus agréable
+                        'dark-bg': '#1a202c',
+                        'dark-card': '#2d3748',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Définition de la police Inter par défaut pour toute la page */
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Styles spécifiques pour le carrousel d'images publicitaires */
+        .billboard-container {
+            position: relative;
+            height: 18rem; /* Hauteur définie pour les images (un peu plus grand que l'ancien slider) */
+            overflow: hidden;
+            border-radius: 1rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            border: 2px solid #3b82f6; /* border-blue-500 */
+        }
+
+        .billboard-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out; /* Transition pour l'opacité */
+        }
+
+        .billboard-image.active {
+            opacity: 1;
+        }
+
+        /* Animation d'entrée/sortie (glissement léger) */
+        @keyframes slide-in-out {
+            0% { transform: scale(1.05); }
+            50% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .billboard-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Appliquer une légère animation de zoom/panoramique pour le dynamisme */
+            animation: slide-in-out 9s infinite alternate;
+        }
+    </style>
+</head>
+<!-- Mise à jour du corps pour supporter le mode sombre -->
+<body class="bg-white dark:bg-gray-900 font-sans min-h-screen p-4 flex items-center justify-center text-gray-900 dark:text-gray-100">
+
+    <div class="w-full max-w-lg mx-auto bg-white dark:bg-dark-card p-6 sm:p-10 rounded-2xl shadow-2xl shadow-blue-200/50 dark:shadow-gray-800/50 space-y-6 md:space-y-8 border border-blue-300 dark:border-blue-700">
+
+        <!-- Bouton pour basculer le mode sombre -->
+        <div class="flex justify-end">
+            <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 transition duration-300 hover:scale-105">
+                <!-- Icône Soleil (Mode Clair) -->
+                <svg id="icon-sun" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <!-- Icône Lune (Mode Sombre) -->
+                <svg id="icon-moon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
+
+        <header class="text-center space-y-3">
+            <div class="mx-auto w-32 h-32 flex items-center justify-center rounded-full overflow-hidden shadow-lg border-4 border-white dark:border-gray-800 bg-white dark:bg-gray-700">
+                <!-- Image du logo ZalalConnecté (maintenue ronde) -->
+                <img src="images/zala.png" alt="Logo ZalalConnecté" class="w-full h-full object-cover">
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-blue-400 dark:text-blue-400">
+                Bienvenue sur ZalaConnecté
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg">
+                Connectez-vous pour accéder à notre Wi-Fi haute vitesse
+            </p>
+        </header>
+
+        <section class="ads pt-4">
+            <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-center text-blue-600 dark:text-blue-400">
+                Nos Partenariats & Promotions
+            </h2>
+            <!-- Panneau publicitaire avec carrousel d'images -->
+            <div id="billboard-slider" class="billboard-container">
+
+                <!-- Slide 1: LF Groupe - Douanes/Logistique -->
+                <div class="billboard-image active">
+                    <img src="images/lf-douane.jpeg" alt="Promotion Douanes Logistique LF Groupe" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Slide 2: LF Groupe - Mécanique -->
+                <div class="billboard-image">
+                    <img src="images/lf-mecanique.jpeg" alt="Promotion Mécanique Générale LF Groupe" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Slide 3: LF Groupe - Voyages -->
+                <div class="billboard-image">
+                    <img src="images/lf-travel.jpeg" alt="Promotion Assistance Voyage LF Groupe" class="w-full h-full object-cover">
+                </div>
+
+            </div>
+        </section>
+
+        <section class="login-form space-y-4 pt-4">
+            <form action="/connect" method="post" class="space-y-4">
+                <input
+                    id="username-input"
+                    type="text"
+                    name="username"
+                    placeholder="Nom d'utilisateur"
+                    class="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                >
+                <input
+                    id="login-input"
+                    type="text"
+                    name="identifiant"
+                    placeholder="OU Jeton (Token)"
+                    class="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                >
+                <p id="error-message" class="text-sm text-red-500 text-center font-medium hidden">
+                    Veuillez entrer votre nom d'utilisateur, ou un jeton.
+                </p>
+                <button
+                    type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg transition duration-300 transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-blue-500/50"
+                >
+                    Se connecter
+                </button>
+            </form>
+           <p class="no-account text-center text-sm text-gray-500 dark:text-gray-400 pt-2">
+                Pas encore de compte ?
+                <a href="register.html" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition duration-200">Créer un compte</a>
+            </p>
+
+        </section>
+
+        <div class="text-center pt-2">
+            <a href="interface-paiement.html" class="inline-flex items-center justify-center w-full px-4 py-3 border border-blue-600 text-blue-600 dark:text-blue-400 bg-white dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-gray-700 font-bold rounded-xl shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+                Payer votre ticket en ligne
+            </a>
+        </div>
+
+        <section class="plans pt-4">
+            <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-center text-blue-600 dark:text-blue-400">
+                Nos Formules d'Abonnement
+            </h2>
+            <div class="overflow-x-auto rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+                <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
+                    <thead class="bg-blue-600 dark:bg-blue-700">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
+                                Formule
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
+                                Durée
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
+                                Prix
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
+                        <tr class="hover:bg-blue-50 dark:hover:bg-blue-900 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 dark:text-blue-400">Basique</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">1 heure</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-green-600 dark:text-green-400">500 fc</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50 dark:hover:bg-blue-900 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 dark:text-blue-400">Standard</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">3 heure</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-green-600 dark:text-green-400">1000 fc</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50 dark:hover:bg-blue-900 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 dark:text-blue-400">Premium</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">24 heure</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-green-600 dark:text-green-400">2000 fc</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+
+        <footer class="text-center pt-4 text-xs text-gray-500 dark:text-gray-500">
+            <p>&copy; 2025 ZalaConnecté. Tous droits réservés.</p>
+        </footer>
+
+    </div>
+
+<script>
+    // ==========================================================
+    // ===== Logique du Mode Sombre (Dark Mode) =====
+    // ==========================================================
+    const htmlElement = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const iconSun = document.getElementById('icon-sun');
+    const iconMoon = document.getElementById('icon-moon');
+
+    // Fonction pour mettre à jour l'icône du bouton
+    function updateIcon(isDarkMode) {
+        if (isDarkMode) {
+            iconSun.classList.remove('hidden');
+            iconMoon.classList.add('hidden');
+        } else {
+            iconSun.classList.add('hidden');
+            iconMoon.classList.remove('hidden');
+        }
+    }
+
+    // Lire la préférence utilisateur ou utiliser le mode sombre par défaut
+    // Le mode sombre est activé par défaut dans la balise <html>
+    let isDarkMode = htmlElement.classList.contains('dark');
+    updateIcon(isDarkMode);
+
+    themeToggle.addEventListener('click', () => {
+        isDarkMode = !isDarkMode; // Inverser l'état
+
+        if (isDarkMode) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        updateIcon(isDarkMode);
+    });
+
+    // ==========================================================
+    // ===== Validation simple du formulaire (sans alert()) =====
+    // ==========================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('.login-form form');
+        const usernameInput = document.getElementById('username-input');
+        const tokenInput = document.getElementById('login-input');
+        const errorMessage = document.getElementById('error-message');
+
+        form.addEventListener('submit', function(e) {
+            const isUsernameEmpty = usernameInput.value.trim() === '';
+            const isTokenEmpty = tokenInput.value.trim() === '';
+
+            if (isUsernameEmpty && isTokenEmpty) {
+                e.preventDefault();
+                errorMessage.classList.remove('hidden');
+                usernameInput.focus();
+                setTimeout(() => {
+                    errorMessage.classList.add('hidden');
+                }, 3000);
+            } else {
+                errorMessage.classList.add('hidden');
+            }
+        });
+
+        // ====================================================
+        // ===== Carrousel d'images pour les publicités =====
+        // ====================================================
+        const billboardSlider = document.getElementById('billboard-slider');
+        const slides = billboardSlider.querySelectorAll('.billboard-image');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        const intervalTime = 3000; // 3 secondes
+
+        function showNextSlide() {
+            // Retirer la classe 'active' de la diapositive actuelle
+            slides[currentSlide].classList.remove('active');
+
+            // Passer à la diapositive suivante
+            currentSlide = (currentSlide + 1) % totalSlides;
+
+            // Ajouter la classe 'active' à la nouvelle diapositive
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Démarrer le carrousel uniquement s'il y a plus d'une image
+        if (totalSlides > 1) {
+             // Assurer que la première slide est active au démarrage (déjà fait dans le HTML, mais pour la sécurité)
+             slides[0].classList.add('active');
+             setInterval(showNextSlide, intervalTime);
+        } else if (totalSlides === 1) {
+            slides[0].classList.add('active');
+        }
+    });
+</script>
+
+</body>
+</html>

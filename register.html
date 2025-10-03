@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - ZalalConnecté</title>
+    <!-- Chargement de Tailwind CSS pour un design moderne et responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Définition de la police Inter par défaut pour toute la page */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<!-- Utilisation du fond blanc et centrage du contenu -->
+<body class="bg-white min-h-screen p-4 flex items-center justify-center text-gray-900">
+
+    <!-- Conteneur principal: Carte d'inscription stylisée -->
+    <div class="w-full max-w-sm mx-auto bg-white p-8 rounded-2xl shadow-2xl shadow-blue-200/50 space-y-6 border border-blue-300">
+
+        <!-- En-tête de la carte -->
+        <header class="text-center space-y-2">
+            <!-- Logo ou icône -->
+            <div class="mx-auto w-16 h-16 p-1 bg-blue-50 rounded-full shadow-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+            </div>
+            <h1 class="text-2xl font-extrabold text-blue-600">
+                Créer un compte
+            </h1>
+            <p class="text-sm text-gray-500">
+                Accédez à tous nos forfaits Wi-Fi
+            </p>
+        </header>
+
+        <!-- Formulaire d'inscription -->
+        <section class="register-form space-y-4">
+            <!-- L'action est réglée sur /register pour le backend Flask -->
+            <form action="/register" method="post" class="space-y-4">
+                <!-- Champ Nom complet -->
+                <input
+                    type="text"
+                    name="nom"
+                    placeholder="Nom complet"
+                    required
+                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                >
+                <!-- Champ Email -->
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Adresse email"
+                    required
+                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                >
+                <!-- Champ Téléphone -->
+                <input
+                    type="tel"
+                    name="telephone"
+                    placeholder="Numéro de téléphone"
+                    required
+                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                >
+                <!-- Champ Mot de passe -->
+                <input
+                    type="password"
+                    name="motdepasse"
+                    placeholder="Mot de passe"
+                    required
+                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                >
+
+                <!-- Bouton S'inscrire -->
+                <button
+                    type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 mt-2 rounded-lg shadow-lg transition duration-300 transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-blue-500/50"
+                >
+                    Créer mon compte
+                </button>
+            </form>
+        </section>
+
+        <!-- Lien de retour -->
+        <p class="back-login text-center text-sm text-gray-500 pt-2">
+            Déjà un compte ?
+            <a href="index.html" class="text-blue-600 hover:text-blue-800 font-medium transition duration-200">Se connecter</a>
+        </p>
+    </div>
+</body>
+</html>
